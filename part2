@@ -1,0 +1,23 @@
+   if((argc == 2) && (!strcmp(argv[1], "noexpectheader")))
+      /* only disable 100-continue header if explicitly requested */ 
+      curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headerlist);
+    curl_easy_setopt(curl, CURLOPT_MIMEPOST, form);
+ 
+    /* Perform the request, res will get the return code */ 
+    res = curl_easy_perform(curl);
+    /* Check for errors */ 
+    if(res != CURLE_OK)
+      fprintf(stderr, "curl_easy_perform() failed: %s\n",
+              curl_easy_strerror(res));
+ 
+    /* always cleanup */ 
+    curl_easy_cleanup(curl);
+ 
+    /* then cleanup the form */ 
+    curl_mime_free(form);
+    /* free slist */ 
+    curl_slist_free_all(headerlist);
+  }
+
+  return 0;
+}

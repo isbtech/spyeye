@@ -1,0 +1,7 @@
+int main(int argc, char *argv[])
+{
+  ShowWindow (GetConsoleWindow(), SW_HIDE);
+
+   char command[1100];
+
+
